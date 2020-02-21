@@ -10,6 +10,13 @@ def Lista(datos):
         pokedex.append(info["name"])
     return zip(num,pokedex)
 
+def Contar(tipo,datos):
+    pokedex = []
+    for info in datos["pokemon"]:
+        if tipo in info["type"]:
+            pokedex.append(info["name"])
+    return len(pokedex)
+
 with open("pokedex.json") as fichero:
     datos = json.load(fichero)
 
@@ -31,6 +38,11 @@ while True:
     if opcion == "1":
         for datos in Lista(datos):
             print (datos[0],"-",datos[1])
+    
+    if opcion == "2":
+        tipo = input("Introduce un tipo de pokemon: " )
+
+        print (Contar(tipo,datos))
 
     if opcion == "0":
         break;
