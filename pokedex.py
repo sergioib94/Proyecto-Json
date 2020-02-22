@@ -17,6 +17,15 @@ def Contar(tipo,datos):
             pokedex.append(info["name"])
     return len(pokedex)
 
+def Filtrar(datos):
+    pokemon = []
+    huevos = []
+    for info in datos["pokemon"]:
+        if info["egg"] != "Not in Eggs":
+            huevos.append(info["egg"])
+            pokemon.append(info["name"])
+    return zip (pokemon,huevos)
+
 with open("pokedex.json") as fichero:
     datos = json.load(fichero)
 
@@ -36,6 +45,8 @@ while True:
     print ("")
 
     if opcion == "1":
+        print ("Listados de pokemons: ")
+        print ("")
         for datos in Lista(datos):
             print (datos[0],"-",datos[1])
     
@@ -43,6 +54,12 @@ while True:
         tipo = input("Introduce un tipo de pokemon: " )
 
         print (Contar(tipo,datos))
+
+    if opcion == "3":
+        print ("Los siquientes pokemons nacen de huevo:")
+        print ("")
+        for datos in Filtrar(datos):
+            print ("*",datos[0],"-",datos[1])
 
     if opcion == "0":
         break;
