@@ -26,6 +26,30 @@ def Filtrar(datos):
             pokemon.append(info["name"])
     return zip (pokemon,huevos)
 
+def Buscar(estadistica,base,datos):
+    pokemon = []
+    if estadistica == "HP":
+        for info in datos["pokemon"]:
+            if info["base"]["HP"] > base:
+                pokemon.append(info["name"])
+
+    elif estadistica == "Attack":
+        for info in datos["pokemon"]:
+            if info["base"]["Attack"] > base:
+                pokemon.append(info["name"])
+
+    elif estadistica == "Defense":
+        for info in datos["pokemon"]:
+            if info["base"]["Defense"] > base:
+                pokemon.append(info["name"])
+
+    elif estadistica == "Speed":
+        for info in datos["pokemon"]:
+            if info["base"]["Speed"] > base:
+                pokemon.append(info["name"])
+
+    return pokemon
+
 with open("pokedex.json") as fichero:
     datos = json.load(fichero)
 
@@ -60,6 +84,13 @@ while True:
         print ("")
         for datos in Filtrar(datos):
             print ("*",datos[0],"-",datos[1])
+
+    if opcion == "4":
+        estadistica = input("Introduce la estadistica que quieras comprobar: ")
+        base = int(input("Introduce el valor de la estadistica: "))
+
+        for datos in Buscar(estadistica,base,datos):
+            print (datos)
 
     if opcion == "0":
         break;
