@@ -71,8 +71,8 @@ while True:
     if opcion == "1":
         print ("Listados de pokemons: ")
         print ("")
-        for datos in Lista(datos):
-            print (datos[0],"-",datos[1])
+        for pokemon in Lista(datos):
+            print (pokemon[0],"-",pokemon[1])
     
     if opcion == "2":
         tipo = input("Introduce un tipo de pokemon: " )
@@ -82,15 +82,15 @@ while True:
     if opcion == "3":
         print ("Los siquientes pokemons nacen de huevo:")
         print ("")
-        for datos in Filtrar(datos):
-            print ("*",datos[0],"-",datos[1])
+        for huevo in Filtrar(datos):
+            print ("*",huevo[0],"-",huevo[1])
 
     if opcion == "4":
         estadistica = input("Introduce la estadistica que quieras comprobar: ")
         base = int(input("Introduce el valor de la estadistica: "))
 
-        for datos in Buscar(estadistica,base,datos):
-            print (datos)
+        for estadistica in Buscar(estadistica,base,datos):
+            print (estadistica)
 
     if opcion == "0":
         break;
