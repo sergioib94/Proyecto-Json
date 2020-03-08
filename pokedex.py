@@ -1,54 +1,4 @@
-import json
-
-def Lista(datos):
-    num = []
-    pokedex = []
-    for id in datos["pokemon"]:
-        num.append(id["id"])
-
-    for info in datos["pokemon"]:
-        pokedex.append(info["name"])
-    return zip(num,pokedex)
-
-def Contar(tipo,datos):
-    pokedex = []
-    for info in datos["pokemon"]:
-        if tipo in info["type"]:
-            pokedex.append(info["name"])
-    return len(pokedex)
-
-def Filtrar(datos):
-    pokemon = []
-    huevos = []
-    for info in datos["pokemon"]:
-        if info["egg"] != "Not in Eggs":
-            huevos.append(info["egg"])
-            pokemon.append(info["name"])
-    return zip (pokemon,huevos)
-
-def Buscar(estadistica,base,datos):
-    pokemon = []
-    if estadistica == "HP":
-        for info in datos["pokemon"]:
-            if info["base"]["HP"] > base:
-                pokemon.append(info["name"])
-
-    elif estadistica == "Attack":
-        for info in datos["pokemon"]:
-            if info["base"]["Attack"] > base:
-                pokemon.append(info["name"])
-
-    elif estadistica == "Defense":
-        for info in datos["pokemon"]:
-            if info["base"]["Defense"] > base:
-                pokemon.append(info["name"])
-
-    elif estadistica == "Speed":
-        for info in datos["pokemon"]:
-            if info["base"]["Speed"] > base:
-                pokemon.append(info["name"])
-
-    return pokemon
+from func_pokedex import *
 
 with open("pokedex.json") as fichero:
     datos = json.load(fichero)
@@ -62,6 +12,7 @@ while True:
     print ("3.Buscar o Filtrar informacion: Buscar los pokemons que pueden salir de un huevo.")
     print ("4.Buscar informacion relacionada: Meter por teclado una caracteristica de un pokemon y decir que pokemons superan esa estadistica.")
     print ("5.Ejercicio Libre: Proponer un combate, pedir por teclado el nombre de dos pokemons y decir quien ganaria.")
+    print ("6.Ayuda (listado de tipos)")
     print ("0.Salir")
     print ("")
 
@@ -91,6 +42,19 @@ while True:
 
         for estadistica in Buscar(estadistica,base,datos):
             print (estadistica)
+    
+    if opcion == "5":
+        pokemon1 = input("Introduce el nombre de tu pokemon: ")
+        pokemon2 = input("Introduce el nombre del pokemon rival: ")
+
+        for i in Combate(pokemon1,pokemon2,datos):
+            for j in i:
+                print (j)
+
+    if opcion == "6":
+        print ("Tipos de pokemon:")
+        print ("")
+        print ("Water,Fire,Ice,Flying,Psychic,Poison,Grass,Ground,Rock,Electric,Bug,Normal,Fighting,Fairy,Dark,Ghost")
 
     if opcion == "0":
         break;
